@@ -12,7 +12,7 @@ class _ProdutosPageState extends State<ProdutosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: GridView.count(crossAxisCount: 2, children: const [
+      body: GridView.count(crossAxisCount: 1, children: const [
         Product(title: "Fruta", valor: 12.3),
         Product(title: "Pão", valor: 12.3),
         Product(title: "Celular", valor: 12.3),
@@ -33,7 +33,7 @@ class Product extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(10),
+      margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
       child: Card(
         child: Column(
           children: [

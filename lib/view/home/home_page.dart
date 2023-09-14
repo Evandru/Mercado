@@ -27,6 +27,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Mercado",
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
         actions: [
           IconButton(
               onPressed: () {}, icon: const Icon(Icons.shopping_bag, size: 40))
@@ -39,8 +42,11 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 150,
               width: MediaQuery.sizeOf(context).width,
-              child: const Text("Mercado",
-                  textAlign: TextAlign.center, style: TextStyle(fontSize: 40)),
+              child: const Center(
+                child: Text("Compre Conosco",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 35)),
+              ),
             ),
             ElevatedButton(
                 onPressed: () {
@@ -76,7 +82,7 @@ class _HomePageState extends State<HomePage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.mail),
+            icon: Icon(Icons.list),
             label: 'Produtos',
           ),
         ],

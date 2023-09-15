@@ -1,40 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mercado/view/produtos/produtos_page.dart';
-import 'package:mercado/view/widgets/custom_drawer.dart';
+import 'package:mercado/view/shared/widgets/custom_appbar.dart';
+import 'package:mercado/view/shared/widgets/custom_drawer.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
-
-  final List<Widget> _children = [
-    HomePage(),
-    ProdutosPage(),
-  ];
-
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Mercado",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
-        actions: [
-          IconButton(
-              onPressed: () {}, icon: const Icon(Icons.shopping_bag, size: 40))
-        ],
-      ),
+      appBar: customAppBarWithTitle(context, "Mercado"),
       drawer: const CustomDrawer(),
       body: SingleChildScrollView(
         child: Column(
@@ -73,21 +52,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped,
-        currentIndex: _currentIndex,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Produtos',
-          ),
-        ],
-      ),
-      // -> CARRINHO: floatingActionButton: ,
     );
   }
 }

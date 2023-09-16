@@ -4,7 +4,9 @@ import 'package:mercado/view/home/home_page.dart';
 import 'package:mercado/view/produtos/produtos_page.dart';
 
 void main() {
-  runApp(const MyAppWidget());
+  runApp(
+    const MyAppWidget()
+  );
 }
 
 class MyAppWidget extends StatelessWidget {

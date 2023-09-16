@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mercado/view/carrinho/carrinho_page.dart';
 import 'package:mercado/view/home/home_page.dart';
-import 'package:mercado/view/produto/produto_page.dart';
 import 'package:mercado/view/produtos/produtos_page.dart';
 
 void main() {

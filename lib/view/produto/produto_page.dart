@@ -16,7 +16,7 @@ class ProdutoPage extends StatelessWidget {
         Column(
           children: [
             Center(
-                child: Text(produto.nome ?? "Sem nome",
+                child: Text(produto.nome,
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 50))),
             Container(
@@ -28,7 +28,7 @@ class ProdutoPage extends StatelessWidget {
                     const Text('Disponível',
                         textAlign: TextAlign.left,
                         style: TextStyle(fontSize: 20)),
-                    Text(produto.unidade.toString() ?? "0",
+                    Text(produto.unidade.toString(),
                         textAlign: TextAlign.right,
                         style: const TextStyle(fontSize: 30))
                   ]),

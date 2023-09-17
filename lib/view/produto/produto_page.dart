@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:mercado/controller/carrinho_controller.dart';
+import 'package:mercado/controller/produto_controller.dart';
 import 'package:mercado/model/produto.dart';
 import 'package:mercado/view/shared/widgets/custom_appbar.dart';
+import 'package:provider/provider.dart';
 
-class ProdutoPage extends StatelessWidget {
+class ProdutoPage extends StatefulWidget {
   const ProdutoPage({super.key, required this.produto});
 
   final Produto produto;
 
   @override
+  State<ProdutoPage> createState() => _ProdutoPageState();
+}
+
+class _ProdutoPageState extends State<ProdutoPage> {
+
+  late CarrinhoController carrinhoController; 
+  late ProdutoController produtoController;
+
+  @override
   Widget build(BuildContext context) {
+    carrinhoController = Provider.of<CarrinhoController>(context);
+    produtoController = Provider.of<ProdutoController>(context);
+
+    widget.produto.preco = produtoController.getPreco(widget.produto);
+
     return Scaffold(
       appBar: customAppBar(context),
       body:
@@ -16,7 +33,7 @@ class ProdutoPage extends StatelessWidget {
         Column(
           children: [
             Center(
-                child: Text(produto.nome,
+                child: Text(widget.produto.nome,
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 50))),
             Container(
@@ -28,7 +45,7 @@ class ProdutoPage extends StatelessWidget {
                     const Text('Disponível',
                         textAlign: TextAlign.left,
                         style: TextStyle(fontSize: 20)),
-                    Text(produto.unidade.toString(),
+                    Text(widget.produto.preco.toStringAsFixed(2),
                         textAlign: TextAlign.right,
                         style: const TextStyle(fontSize: 30))
                   ]),
@@ -48,13 +65,16 @@ class ProdutoPage extends StatelessWidget {
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Row(
               children: [
-                IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_left)),
-                const Text('12', style: TextStyle(fontSize: 18),),
-                IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_right))
+                IconButton(onPressed: (){produtoController.diminuirQuantidade(widget.produto);}, icon: const Icon(Icons.arrow_left)),
+                Text(widget.produto.quantidade.toString(), style: const TextStyle(fontSize: 18),),
+                IconButton(onPressed: (){produtoController.aumentarQuantidade(widget.produto);}, icon: const Icon(Icons.arrow_right))
               ],
             ),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  carrinhoController.addProduto(widget.produto);
+                  Navigator.of(context).pushNamed('/carrinho');
+                },
                 style: ButtonStyle(
                     padding: MaterialStateProperty.resolveWith(
                         (states) => const EdgeInsets.all(10))),

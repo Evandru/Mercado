@@ -3,10 +3,8 @@ import 'package:mercado/model/carrinho.dart';
 import 'package:mercado/model/produto.dart';
 
 class CarrinhoController extends ChangeNotifier{
-  CarrinhoController({required this.carrinho});
+  Carrinho carrinho = Carrinho();
 
-  final Carrinho carrinho;
-  
   void getValorTotal(){
     double valor = 0;
     for (Produto produto in carrinho.listaProdutos){

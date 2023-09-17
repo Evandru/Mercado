@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:mercado/controller/carrinho_controller.dart';
+import 'package:mercado/controller/produto_controller.dart';
 import 'package:mercado/view/carrinho/carrinho_page.dart';
 import 'package:mercado/view/home/home_page.dart';
 import 'package:mercado/view/produtos/produtos_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    const MyAppWidget()
+    MultiProvider(providers: [
+      ChangeNotifierProvider<ProdutoController>(create: (_) => ProdutoController()),
+      ChangeNotifierProvider<CarrinhoController>(create: (_) => CarrinhoController())
+    ],
+    child: MyAppWidget()
+    )
   );
 }
 
@@ -25,7 +33,7 @@ class MyAppWidget extends StatelessWidget {
         '/': (context) => const HomePage(),
         '/produtos': (context) => const ProdutosPage(),
         // '/produto': (context) => ProdutoPage(),
-        '/carrinho': (context) => const CarrinhoPage()
+        '/carrinho': (context) =>  CarrinhoPage()
       },
     );
   }

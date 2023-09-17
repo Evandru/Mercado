@@ -1,22 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:mercado/controller/carrinho_controller.dart';
+import 'package:mercado/controller/produto_controller.dart';
+import 'package:mercado/model/produto.dart';
 import 'package:mercado/view/carrinho/widgets/produto_carrinho.dart';
+import 'package:provider/provider.dart';
 
-class CarrinhoPage extends StatelessWidget {
+class CarrinhoPage extends StatefulWidget {
   const CarrinhoPage({super.key});
 
   @override
+  State<CarrinhoPage> createState() => _CarrinhoPageState();
+}
+
+class _CarrinhoPageState extends State<CarrinhoPage> {
+  late CarrinhoController carrinhoController;
+  late ProdutoController produtoController;
+
+  @override
   Widget build(BuildContext context) {
+    carrinhoController = Provider.of<CarrinhoController>(context);
+    produtoController = Provider.of<ProdutoController>(context);
+    carrinhoController.getValorTotal();
+  
     return Scaffold(
       appBar: AppBar( title: const Text("Carrinho"), centerTitle: true,),
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(itemBuilder: (BuildContext context, int index) {
-                if(index < 10){
-                  return const ProdutoCarrinho();
-                }
-                return null;
-              },
+            child: ListView(
+              children: [
+                
+                if(carrinhoController.carrinho.listaProdutos.isEmpty)
+                  Center(child: Container(height: 200, alignment: Alignment.center,child: const Text("Carrinho Vazio", style: TextStyle(color: Colors.black54, fontSize: 20))))
+                else
+                  for (Produto produto in carrinhoController.carrinho.listaProdutos)
+                    ProdutoCarrinho(produto: produto)
+
+              ],
             ),
           ),
           Container(
@@ -26,7 +46,7 @@ class CarrinhoPage extends StatelessWidget {
             ),
             alignment: Alignment.centerRight,
             padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
-            child: const Text('Total: 1234.56', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),),
+            child: Text("Total: ${carrinhoController.carrinho.valorTotal.toStringAsFixed(2)}", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),),
           ),
           Container(
             // decoration: const BoxDecoration(

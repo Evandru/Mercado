@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mercado/controller/produto_controller.dart';
+import 'package:mercado/model/produto.dart';
 import 'package:mercado/view/produtos/widgets/produto_widget.dart';
 import 'package:mercado/view/shared/widgets/custom_appbar.dart';
+import 'package:provider/provider.dart';
 
 class ProdutosPage extends StatefulWidget {
   const ProdutosPage({super.key});
@@ -10,22 +13,20 @@ class ProdutosPage extends StatefulWidget {
 }
 
 class _ProdutosPageState extends State<ProdutosPage> {
+  late ProdutoController produtoController;
+
   @override
   Widget build(BuildContext context) {
+    produtoController = Provider.of<ProdutoController>(context);
+    List<Produto> listaProdutos = produtoController.mockProdutos();
+
     return Scaffold(
       appBar: customAppBarWithTitle(context, "Produtos"),
-      body: GridView.count(crossAxisCount: 2, children: const [
-        ProdutoWidget(nome: "Fruta", valor: 12.3),
-        ProdutoWidget(nome: "Pão", valor: 12.3),
-        ProdutoWidget(nome: "Celular", valor: 12.3),
-        ProdutoWidget(nome: "Fogão", valor: 12.3),
-        ProdutoWidget(nome: "Carro", valor: 12.3),
-        ProdutoWidget(nome: "Miojo", valor: 12.3),
-        ProdutoWidget(nome: "Cerveja", valor: 12.3),
-        ProdutoWidget(nome: "Suco", valor: 12.3),
-        ProdutoWidget(nome: "Teclado", valor: 12.3),
-        ProdutoWidget(nome: "Televisão", valor: 12.3),
-        ProdutoWidget(nome: "Computadores", valor: 12.3)
+      body: GridView.count(crossAxisCount: 2, children: [
+
+        for(Produto produto in listaProdutos)
+          ProdutoWidget(produto: produto)
+        
       ]),
     );
   }

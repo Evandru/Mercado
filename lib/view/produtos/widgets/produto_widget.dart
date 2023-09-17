@@ -3,29 +3,26 @@ import 'package:mercado/model/produto.dart';
 import 'package:mercado/view/produto/produto_page.dart';
 
 class ProdutoWidget extends StatelessWidget {
-  const ProdutoWidget({super.key, required this.nome, required this.valor});
+  const ProdutoWidget({super.key, required this.produto});
 
-  final String nome;
-  final double valor;
-
+  final Produto produto;
   
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigator.of(context).pushNamed('/produto');
         Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => ProdutoPage(produto: Produto(nome: nome, quantidade: 1, unidade: valor),)));
+            builder: (context) => ProdutoPage(produto: Produto(nome: produto.nome, quantidade: 1, unidade: produto.unidade),)));
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         child: Card(
           child: Column(
             children: [
-              Text(nome,overflow: TextOverflow.ellipsis,
+              Text(produto.nome,overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 30,
@@ -34,14 +31,21 @@ class ProdutoWidget extends StatelessWidget {
                 width: double.infinity,
                 height: 30,
                 child: Text(
-                  "$valor",
+                  produto.unidade.toString(),
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 20),
                 ),
               ),
               ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed('/produto');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProdutoPage(
+                          produto: produto
+                        )
+                      )
+                    );
                   },
                   style: ButtonStyle(
                       padding: MaterialStateProperty.resolveWith(

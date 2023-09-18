@@ -6,10 +6,11 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      width: 200,
       child: ListView(
         children: [
           SizedBox(
-            height: 100,
+            height: 75,
             child: DrawerHeader(
               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
               decoration: BoxDecoration(color: Colors.green[600]),
@@ -22,7 +23,7 @@ class CustomDrawer extends StatelessWidget {
           ),
 
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            margin: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               border: Border(bottom: BorderSide(width: 1, color: Colors.green[300]!))
             ),
@@ -32,7 +33,7 @@ class CustomDrawer extends StatelessWidget {
             )
           ),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            margin: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               border: Border(bottom: BorderSide(width: 1, color: Colors.green[300]!))
             ),
@@ -42,7 +43,7 @@ class CustomDrawer extends StatelessWidget {
             )
           ),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            margin: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               border: Border(bottom: BorderSide(width: 1, color: Colors.green[300]!))
             ),

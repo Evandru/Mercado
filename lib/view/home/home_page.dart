@@ -19,12 +19,12 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             SizedBox(
-              height: 150,
+              height: 250,
               width: MediaQuery.sizeOf(context).width,
               child: const Center(
                 child: Text("Compre Conosco",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 35)),
+                    textAlign: TextAlign.center, 
+                    style: TextStyle(fontSize: 60, height: 1, fontWeight: FontWeight.w100, fontStyle: FontStyle.italic)),
               ),
             ),
             ElevatedButton(

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:mercado/model/produto.dart';
 import 'package:mercado/view/produto/produto_page.dart';
@@ -19,21 +20,30 @@ class ProdutoWidget extends StatelessWidget {
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        
         child: Card(
-          child: Column(
+          elevation: 3,
+          child: Column( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(produto.nome,overflow: TextOverflow.ellipsis,
+              AutoSizeText(produto.nome,
+                  maxLines: 2,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 30,
-                  )),
+                  style: const TextStyle(fontSize: 25, height: 1.2),
+                  minFontSize: 20,
+                  wrapWords: false,
+              ),
               SizedBox(
                 width: double.infinity,
-                height: 30,
-                child: Text(
-                  produto.unidade.toString(),
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 20),
+                // height: 40,
+                child: Center(
+                  child: Text(
+                    produto.unidade.toString(),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20, 
+                      color: Color.fromARGB(255, 2, 43, 5),
+                    ),
+                  ),
                 ),
               ),
               ElevatedButton(

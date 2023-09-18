@@ -34,10 +34,10 @@ class _ProdutoPageState extends State<ProdutoPage> {
           children: [
             Center(
                 child: Text(widget.produto.nome,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 50))),
+                     textAlign: TextAlign.center,
+                     style: const TextStyle(fontSize: 50, height: 1.1))),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               width: double.infinity,
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,9 +65,13 @@ class _ProdutoPageState extends State<ProdutoPage> {
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Row(
               children: [
-                IconButton(onPressed: (){produtoController.diminuirQuantidade(widget.produto);}, icon: const Icon(Icons.arrow_left)),
+                IconButton(onPressed: (){produtoController.diminuirQuantidade(widget.produto);}, icon: const Icon(Icons.arrow_left),
+                  color: widget.produto.quantidade==1 ? Colors.black12 : Colors.black,
+                  ),
                 Text(widget.produto.quantidade.toString(), style: const TextStyle(fontSize: 18),),
-                IconButton(onPressed: (){produtoController.aumentarQuantidade(widget.produto);}, icon: const Icon(Icons.arrow_right))
+                IconButton(onPressed: (){produtoController.aumentarQuantidade(widget.produto);}, icon: const Icon(Icons.arrow_right),
+                  color: widget.produto.quantidade==100 ? Colors.black12 : Colors.black,
+                  )
               ],
             ),
             ElevatedButton(

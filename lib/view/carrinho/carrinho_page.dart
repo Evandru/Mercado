@@ -39,24 +39,45 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
               ],
             ),
           ),
+          
+          
           Container(
-            decoration: const BoxDecoration(
-              color: Colors.black12,
-              border: Border(top: BorderSide(width: 2)),
+            decoration: BoxDecoration(
+              color: Colors.green[100],
+              border: const Border(top: BorderSide(width: 1)),
             ),
             alignment: Alignment.centerRight,
             padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
-            child: Text("Total: ${carrinhoController.carrinho.valorTotal.toStringAsFixed(2)}", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),),
+            child: Text("Total: ${carrinhoController.carrinho.valorTotal.toStringAsFixed(2)}", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),),
           ),
           Container(
-            // decoration: const BoxDecoration(
-            //   color: const Color.fromRGBO(0, 255, 0, 0.3),
-               color: Colors.black12,
-            // ),
+            color: Colors.green[100],
             alignment: Alignment.bottomCenter,
             padding: const EdgeInsets.only(bottom: 15),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (_) => AlertDialog(
+                    title: const Text("Finalizar"),
+                    content: const Text("Deseja finalizar a compra?"),
+                    actions: [
+                      OutlinedButton(
+                        onPressed: () { Navigator.of(context).pop(); },
+                         child: const Text("Não"),
+                      ),
+                      OutlinedButton(
+                        onPressed: () { 
+                          carrinhoController.clear();
+                          Navigator.of(context).pushReplacementNamed('/'); 
+                        },
+                        child: const Text("Sim"),
+                      )
+                    ],
+                  ),
+                  barrierDismissible: false,
+                );
+              },
               child: const Text("Finalizar Compra",
                   style: TextStyle(fontSize: 25)),
             ),

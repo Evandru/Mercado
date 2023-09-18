@@ -8,9 +8,12 @@ class ProdutoController extends ChangeNotifier{
   }
 
   void aumentarQuantidade(Produto produto){
-    produto.quantidade++;
-    produto.preco = getPreco(produto);
-    notifyListeners();
+    if (produto.quantidade < 100)
+    {
+      produto.quantidade++;
+      produto.preco = getPreco(produto);
+      notifyListeners();
+    }
   }
 
   void diminuirQuantidade(Produto produto){
@@ -34,7 +37,10 @@ class ProdutoController extends ChangeNotifier{
       Produto(nome: "Suco", quantidade: 1, unidade: 1.0),
       Produto(nome: "Teclado", quantidade: 1, unidade: 249.99),
       Produto(nome: "Televisão", quantidade: 1, unidade: 1500.00),
-      Produto(nome: "Computador", quantidade: 1, unidade: 5000.11)
+      Produto(nome: "Computador", quantidade: 1, unidade: 5000.11),
+      Produto(nome: "Contra Baixo", quantidade: 1, unidade: 1500.23),
+      Produto(nome: "Guitarra", quantidade: 1, unidade: 1000.12),
+      Produto(nome: "Bateria Eletronica", quantidade: 1, unidade: 6666.66),
     ];
     return produtos;
   }

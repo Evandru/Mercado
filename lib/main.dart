@@ -12,7 +12,7 @@ void main() {
       ChangeNotifierProvider<ProdutoController>(create: (_) => ProdutoController()),
       ChangeNotifierProvider<CarrinhoController>(create: (_) => CarrinhoController())
     ],
-    child: MyAppWidget()
+    child: const MyAppWidget()
     )
   );
 }
@@ -33,7 +33,7 @@ class MyAppWidget extends StatelessWidget {
         '/': (context) => const HomePage(),
         '/produtos': (context) => const ProdutosPage(),
         // '/produto': (context) => ProdutoPage(),
-        '/carrinho': (context) =>  CarrinhoPage()
+        '/carrinho': (context) =>  const CarrinhoPage()
       },
     );
   }

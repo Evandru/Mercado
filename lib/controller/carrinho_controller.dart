@@ -14,14 +14,29 @@ class CarrinhoController extends ChangeNotifier{
   }
 
   void addProduto(Produto produto){
-    carrinho.listaProdutos.add(produto);
-    getValorTotal();
-    notifyListeners();
+    if (produto.quantidade < 100){
+      if (carrinho.listaProdutos.contains(produto))
+      {
+        var prod = carrinho.listaProdutos.firstWhere((element) => element == produto);
+        prod.quantidade++;
+        getValorTotal();
+        notifyListeners();
+      }
+      else {
+        carrinho.listaProdutos.add(produto);
+        getValorTotal();
+        notifyListeners();
+      }
+    }
   }
 
   void removeProduto(Produto produto){
     carrinho.listaProdutos.remove(produto);
     getValorTotal();
     notifyListeners();
+  }
+
+  void clear(){
+    carrinho.listaProdutos = [];
   }
 }

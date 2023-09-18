@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:mercado/controller/carrinho_controller.dart';
 import 'package:mercado/controller/produto_controller.dart';
@@ -23,30 +24,43 @@ class _ProdutoCarrinhoState extends State<ProdutoCarrinho> {
     produtoController = Provider.of<ProdutoController>(context);
 
     return Container(
-      decoration: const BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0.02),border: Border(bottom: BorderSide(width: 2, color: Colors.black26))),
+      decoration: BoxDecoration(
+        color: Colors.lightGreen[50],
+        border: const Border(
+          bottom: BorderSide(
+            width: 1, 
+            color: Colors.black12
+          )
+        )
+      ),
       margin: const EdgeInsets.all(5),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Column(children: [
-          Text(widget.produto.nome, style: const TextStyle(fontSize: 20)),
+      child: Row( mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        Column( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+          AutoSizeText(widget.produto.nome, style: const TextStyle(fontSize: 20), maxLines: 1, wrapWords: false),
           Row(
             children: [
-              IconButton(onPressed: () {produtoController.diminuirQuantidade(widget.produto);}, icon: const Icon(Icons.arrow_left)),
+              IconButton(onPressed: () {produtoController.diminuirQuantidade(widget.produto);}, icon: const Icon(Icons.arrow_left),
+               color: widget.produto.quantidade==1 ? Colors.black12 : Colors.black
+              ),
               Text(
                 widget.produto.quantidade.toString(),
                 style: const TextStyle(fontSize: 18),
               ),
-              IconButton(onPressed: () {produtoController.aumentarQuantidade(widget.produto);}, icon: const Icon(Icons.arrow_right))
+              IconButton(onPressed: () {produtoController.aumentarQuantidade(widget.produto);}, icon: const Icon(Icons.arrow_right),
+                color: widget.produto.quantidade==100 ? Colors.black12 : Colors.black
+              )
             ],
           )
         ]),
-        Row(
+        Row( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                widget.produto.preco.toStringAsFixed(2),
-                style: const TextStyle(fontSize: 20),
-              ),
+            AutoSizeText(
+              widget.produto.preco.toStringAsFixed(2),
+              minFontSize: 15,
+              maxLines: 1,
+              wrapWords: false,
+              style: const TextStyle(fontSize: 20),
             ),
             IconButton(
                 onPressed: () {carrinhoController.removeProduto(widget.produto);},
